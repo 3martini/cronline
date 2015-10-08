@@ -1,4 +1,4 @@
-# Cronline
+# CronLine
 
 Code goes in `lib/cronline`. To experiment with that code, run `bin/console` for an interactive prompt.
 

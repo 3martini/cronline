@@ -5,7 +5,7 @@ require 'cronline/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "cronline"
-  spec.version       = Cronline::VERSION
+  spec.version       = CronLine::VERSION
   spec.authors       = ["anton-vattay"]
   spec.email         = ["anton.vattay@opower.com"]
 

@@ -1,14 +1,19 @@
-require "generator"
 module CronLine
   class Translator
 
-    @range_seconds = 604800 # One Day in seconds
-    @start_time = Time.now
+    @range_seconds = 60
+
+    def self.range_seconds
+      @range_seconds
+    end
 
     def self.execute(tagged_crons)
       @result = []
       tagged_crons.each do |tagged_cron|
-        result += TaggedInstant.new(Generator.generate(tagged_cron.expression), tagged_cron.id)
+        times = Simulator.simulate(tagged_cron.expression)
+        times.each do |time|
+          result += TaggedTime.new(time, tagged_cron.id)
+        end
       end
 
     end

@@ -9,13 +9,16 @@ module CronLine
     @years = []
 
 
-    def self.create(cron_expression)
-      subject = Cron.new
-      #parse the string, set the values for each of the field types
+    def initialize(cron_expression)
+      @seconds = CronSeconds.new(cron_expression)
+      @minutes = CronMinutes.new(cron_expression)
     end
 
-    def test(time)
+    def test?(time)
       #Given the field values, does this time cause the cron to fire?
+      @seconds.test?(time)
     end
+
+
   end
 end
