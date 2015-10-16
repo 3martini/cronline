@@ -8,6 +8,7 @@ module CronLine
     @years
     @start_date
     @end_date
+    @max_iterations
 
     @iterations
 
@@ -15,37 +16,32 @@ module CronLine
       'EST'
     end
 
-    def self.max_iterations
-      1
+    def self.default_max_iterations
+      10
     end
 
-    def initialize(years, months, days, hours, minutes, seconds, start_date, end_date, timezone)
-      @seconds = seconds
-      @minutes = minutes
-      @hours = hours
-      @days = days
-      @months = months
-      @years = years
+    def initialize(start_date, end_date, timezone, max_iterations)
       @start_date = start_date || Date.new
-      @end_date = end_date || Date.new
+      @end_date = end_date || Date.new + 14
 
       @timezone = timezone || Generator.default_timezone
+      @max_iterations = max_iterations || Generator.default_max_iterations
     end
 
-    def generate
+    def generate(years, months, days, hours, minutes, seconds)
       accumulator = []
       iterations = 0
-      @years.each do |year|
-        @months.each do |month|
-          @days.each do |day|
-            @hours.each do |hour|
-              @minutes.each do |minute|
-                @seconds.each do |second|
-                  if iterations > Generator.max_iterations
-                    return accumulator
-                  end
+      years.each do |year|
+        months.each do |month|
+          days.each do |day|
+            hours.each do |hour|
+              minutes.each do |minute|
+                seconds.each do |second|
                   d = DateTime.new(year, month, day, hour, minute, second, @timezone)
                   accumulator.push(d)
+                  if iterations > Generator.max_iterations || d > @end_date
+                    return accumulator
+                  end
                 end
               end
             end
