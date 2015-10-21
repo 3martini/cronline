@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["anton-vattay"]
   spec.email         = ["anton.vattay@opower.com"]
 
-  spec.summary       = %q{TODO: Converts a list of cron expressions to a sequence of instants in time}
+  spec.summary       = %q{Converts a cron expression to a sequence of instants in time}
   spec.homepage      = "http://opower.com"
   spec.license       = "MIT"
 
@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.9"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_runtime_dependency 'activesupport', "~> 4.2.4"
+  spec.add_development_dependency 'bundler', '~> 1.9'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_runtime_dependency 'activesupport', '~> 4.2.4'
 end

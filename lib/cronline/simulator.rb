@@ -100,7 +100,6 @@ module CronLine
         end
         @start_unix_time += time_increment
       end
-      puts "Ticks #{@tick}"
       @time_accumulator
     end
 
