@@ -24,8 +24,11 @@ Or install it yourself as:
 
 Create a simulator. You don't have to provide any parameters but you can optionally override them using the builder. Default timezone is the local time for the system.
 
-sim = CronLine::Simulator.builder.set_duration(2.weeks).set_timezone('Eastern Time (US & Canada)').build
-times = sim.simulate_cron('0 30 7 ? * MON,WED *')
+    sim = CronLine::Simulator.builder
+      .set_duration(2.weeks)
+      .set_timezone('Eastern Time (US & Canada)')
+      .build
+    times = sim.simulate_cron('0 30 7 ? * MON,WED *')
 
 ## Development
 
