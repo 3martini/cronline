@@ -17,12 +17,16 @@ module CronLine
       @months = CronMonths.new(cron_expression)
       @years = CronYears.new(cron_expression)
 
-      if (cron_days_of_month = CronDaysOfMonth.new(cron_expression)).active?
-        @days = cron_days_of_month
-      elsif (cron_days_of_week = CronDaysOfWeek.new(cron_expression)).active?
+      cron_days_of_month = CronDaysOfMonth.new(cron_expression)
+      cron_days_of_week = CronDaysOfWeek.new(cron_expression)
+      if (cron_days_of_month).active? && (cron_days_of_week).active?
+        fail 'Only one days field is allowed'
+      elsif cron_days_of_week.active?
         @days = cron_days_of_week
+      elsif cron_days_of_month.active?
+        @days = cron_days_of_month
       else
-
+        fail 'One day field is required'
       end
     end
 
@@ -31,8 +35,9 @@ module CronLine
           @hours.test?(time) && @minutes.test?(time) && @seconds.test?(time)
     end
 
-    def precision
-
+    def test_up_to_hours?(time)
+      @years.test?(time) && @months.test?(time) && @days.test?(time) &&
+          @hours.test?(time)
     end
 
   end

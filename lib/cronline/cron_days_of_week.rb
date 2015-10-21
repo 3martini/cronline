@@ -17,7 +17,7 @@ module CronLine
     end
 
     def test?(time)
-      @acceptance.include?(time.wday)
+      @range.include?(time.wday)
     end
   end
 end
