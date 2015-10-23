@@ -1,4 +1,4 @@
-module CronLine
+module Cronline
   class CronField
 
     @range
@@ -12,20 +12,26 @@ module CronLine
       @absolute_min = absolute_min
       @absolute_max = absolute_max
       if field_expression == CronField.wildcard
+        #Wild
         @wild = true
         @range = Integer(absolute_min)..Integer(absolute_max)
       elsif field_expression.include?('-')
+        #Range
         min = Integer(field_expression.split('-')[0])
         max = Integer(field_expression.split('-')[1])
         @range = min..max
       elsif field_expression.include?(',')
+        #Value list
         @range = field_expression.split(',').map do |number_expression|
           Integer(number_expression)
         end
       elsif field_expression.include?('/')
         #Increment
-        fail 'Increment not yet supported'
+        increment_start = field_expression.split('/')[0]
+        increment_step = field_expression.split('/')[1]
+        @range = (Integer(increment_start)..absolute_max).step(Integer(increment_step))
       elsif field_expression == '?'
+        #Disabled
         @range = []
       else
         #Single

@@ -1,4 +1,4 @@
-module CronLine
+module Cronline
   class Simulator
 
     def self.default_max_ticks
@@ -79,7 +79,8 @@ module CronLine
       @timezone = timezone
     end
 
-    def simulate_cron(cron_expression)
+    def simulate_cron(cron_expression, timezone = nil)
+      merged_timezone = timezone.nil? ? @timezone : timezone
       @time_accumulator = []
       cron = Cron.new(cron_expression)
       time_increment = time_increment_size
@@ -90,10 +91,10 @@ module CronLine
         if stop_simulation
           break
         end
-        if @timezone.nil?
+        if merged_timezone.nil?
           time = Time.at(@start_unix_time)
         else
-          time = Time.at(@start_unix_time).in_time_zone(@timezone)
+          time = Time.at(@start_unix_time).in_time_zone(merged_timezone)
         end
         if cron.test_up_to_hours?(time)
           @time_accumulator += generate_hours_and_seconds(cron, time)

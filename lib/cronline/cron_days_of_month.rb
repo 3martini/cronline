@@ -1,4 +1,4 @@
-module CronLine
+module Cronline
   class CronDaysOfMonth < CronField
     @field_expression
 

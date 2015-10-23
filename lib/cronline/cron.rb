@@ -1,4 +1,4 @@
-module CronLine
+module Cronline
   class Cron
     attr_reader :seconds, :minutes, :hours, :days, :months, :years
 

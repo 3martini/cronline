@@ -12,6 +12,6 @@ require "cronline/cron_months"
 require "cronline/cron_years"
 require "active_support/all"
 
-module CronLine
+module Cronline
 
 end

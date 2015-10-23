@@ -5,11 +5,13 @@ require 'cronline/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "cronline"
-  spec.version       = CronLine::VERSION
+  spec.version       = Cronline::VERSION
   spec.authors       = ["anton-vattay"]
   spec.email         = ["anton.vattay@opower.com"]
 
   spec.summary       = %q{Converts a cron expression to a sequence of instants in time}
+  spec.description   = %q{Simulates a cron expression over a range of time and produces the times which the cron is e
+                          expected to fire.}
   spec.homepage      = "http://opower.com"
   spec.license       = "MIT"
 
@@ -28,5 +30,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.9'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_runtime_dependency 'activesupport', '~> 4.2.4'
+  spec.add_runtime_dependency 'activesupport', '~> 4.2'
 end

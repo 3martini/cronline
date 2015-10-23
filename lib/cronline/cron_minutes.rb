@@ -1,4 +1,4 @@
-module CronLine
+module Cronline
   class CronMinutes < CronField
     def initialize(cron_expression)
       expression = cron_expression.split(' ')[1]

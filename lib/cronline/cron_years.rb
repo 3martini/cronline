@@ -1,4 +1,4 @@
-module CronLine
+module Cronline
   class CronYears < CronField
 
     def self.absolute_min_year

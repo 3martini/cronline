@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe CronLine do
+describe Cronline do
   it 'has a version number' do
-    expect(CronLine::VERSION).not_to be nil
+    expect(Cronline::VERSION).not_to be nil
   end
 
 end
