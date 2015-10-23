@@ -33,18 +33,21 @@ module Cronline
       elsif field_expression == '?'
         #Disabled
         @range = []
+      elsif field_expression[-1, 1] == 'L'
+        #Last
+        @range = [Integer(field_expression.sub!('L', ''))]
       else
         #Single
         @range = [Integer(field_expression)]
       end
     end
 
-    def range
+    def range(time = nil)
       @range
     end
 
     def test?(time)
-      @range.include?(time_field(time))
+      range(time).include?(time_field(time))
     end
 
     def time_field(time)

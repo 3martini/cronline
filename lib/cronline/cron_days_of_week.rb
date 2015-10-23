@@ -21,6 +21,14 @@ module Cronline
       @field_expression != '?'
     end
 
+    def range(time)
+      if @last_weekday_of_month
+        [last_weekday_day_of_month(super(time)[0], time)]
+      else
+        super(time)
+      end
+    end
+
     def test?(time)
       if @last_weekday_of_month
         test_last_weekday?(@range[0], time)
@@ -29,6 +37,15 @@ module Cronline
       end
     end
 
+    # Thank you Mohit Sindhwani https://www.ruby-forum.com/topic/125970
+    def last_weekday_day_of_month(weekday_number, time)
+      last_day_of_month = Date.new(time.year, time.month, -1)
+      last_day_wday = ((last_day_of_month.wday + 1) - weekday_number).abs
+      last_day = Date.new(time.year, time.month, (last_day_of_month.day - last_day_wday))
+      last_day.day
+    end
+
+    # Thank you Mohit Sindhwani https://www.ruby-forum.com/topic/125970
     def test_last_weekday?(weekday_number, time)
       last_day_of_month = Date.new(time.year, time.month, -1)
       last_day_wday = ((last_day_of_month.wday + 1) - weekday_number).abs
